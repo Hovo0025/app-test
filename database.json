@@ -2,7 +2,7 @@
   "users": [
     {
       "_id": 0,
-      "picture": "",
+      "picture":{"large":"https://randomuser.me/api/portraits/men/99.jpg","medium":"https://randomuser.me/api/portraits/med/men/99.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/men/99.jpg"},
       "age": 57,
       "firstName": "Berry",
       "lastName": "Hines",
@@ -16,7 +16,11 @@
     },
     {
       "_id": 1,
-      "picture": "",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/96.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/96.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/96.jpg"
+      },
       "age": 45,
       "firstName": "Steele",
       "lastName": "Dyer",
@@ -170,7 +174,7 @@
     },
     {
       "_id": 12,
-      "picture": "",
+      "picture":{"large":"https://randomuser.me/api/portraits/women/78.jpg","medium":"https://randomuser.me/api/portraits/med/women/78.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/women/78.jpg"},
       "age": 47,
       "firstName": "Olive",
       "lastName": "Everett",
@@ -184,7 +188,7 @@
     },
     {
       "_id": 13,
-      "picture": "",
+      "picture":{"large":"https://randomuser.me/api/portraits/men/38.jpg","medium":"https://randomuser.me/api/portraits/med/men/38.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/men/38.jpg"},
       "age": 40,
       "firstName": "Hope",
       "lastName": "Ferguson",
