@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import * as htmlToImage from 'html-to-image';
 
 import { User } from '@core/models';
 import { ExportToService } from '@core/services/export-to.service';
@@ -16,11 +17,22 @@ export class ExportDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('this.data', this.data);
   }
 
   onExportToCsv(): void {
     this.exportToService.exportToCsv(this.data.users);
+    this.dialogRef.close();
+  }
+
+  generateImage(){
+    htmlToImage.toJpeg(document.getElementById('userList'), { quality: 0.95 })
+      .then( (dataUrl) => {
+        const link = document.createElement('a');
+        link.download = 'users.jpeg';
+        link.href = dataUrl;
+        link.click();
+        this.dialogRef.close();
+      });
   }
 
   onClose() {
