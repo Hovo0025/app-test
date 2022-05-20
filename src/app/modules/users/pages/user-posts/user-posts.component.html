@@ -9,7 +9,12 @@
           <div class="img-container">
             <div class="img">
               <ng-container *ngIf="user?.picture?.large; else defaultImg">
-                <img [src]="user.picture.large" alt="">
+                <ng-container *ngIf="innerWidth > 767; else imgLarge">
+                  <img [src]="user.picture.large" alt="">
+                </ng-container>
+                <ng-template #imgLarge>
+                  <img [src]="user.picture.thumbnail" alt="">
+                </ng-template>
               </ng-container>
               <ng-template #defaultImg>
                 <div appDefaultImg

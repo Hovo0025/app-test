@@ -1,7 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, HostListener, OnInit} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { forkJoin, Observable } from 'rxjs';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 import { UsersService } from '@core/api-services/users.service';
 import { PostsService } from '@core/api-services/posts.service';
@@ -17,12 +16,17 @@ export class UserPostsComponent implements OnInit {
   user: User;
   userPosts: Post[] = [];
   isSpinnerVisible = true;
+  innerWidth;
   postPager: any = {
     limit: 10,
     count: 0,
     offset: 1
   };
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
   constructor(private activatedRoute: ActivatedRoute,
               private usersService: UsersService,
               private router: Router,
