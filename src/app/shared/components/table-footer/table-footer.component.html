@@ -1,0 +1,26 @@
+<div class="table__footer">
+    <div class="table__footer__left">
+        <div class="table__footer__total">
+            {{ pagerCount }} total
+        </div>
+        |
+        <div class="table__footer__limit">
+            <label>
+                Show
+                <select (change)="onLimitChange($event.target.value)">
+                  <option [selected]="defaultLimitValue == 1" value="1">10</option>
+                  <option [selected]="defaultLimitValue == 2" value="2">20</option>
+                  <option [selected]="defaultLimitValue == 3" value="3">50</option>
+                  <option [selected]="defaultLimitValue == 4" value="4">100</option>
+                  <option [selected]="defaultLimitValue == 5" value="5">500</option>
+                  <option [selected]="defaultLimitValue == 6" value="6">All</option>
+                </select>
+            </label>
+        </div>
+    </div>
+  <pagination-controls
+    [id]="id"
+    previousLabel=""
+    nextLabel=""
+    (pageChange)="onTablePagerChange($event)"></pagination-controls>
+</div>

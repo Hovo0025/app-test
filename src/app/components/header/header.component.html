@@ -1,0 +1,13 @@
+<nav class="navbar-main">
+  <a [routerLink]="['/']">Test APP</a>
+  <div class="right-side">
+    <div class="theme-toggle-main">
+      <div [class.visible]="currentTheme === 'dark-theme'">Pink</div>
+      <mat-slide-toggle color="accent"
+                        [checked]="currentTheme === 'dark-theme'"
+                        (change)="onThemeChange($event)"></mat-slide-toggle>
+      <div [class.visible]="currentTheme === 'light-theme'">LightGreen</div>
+    </div>
+  </div>
+</nav>
+

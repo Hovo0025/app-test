@@ -1,0 +1,90 @@
+<div class="user-container">
+  <div class="top-content">
+    <div class="title">
+      <div>All Users</div>
+      <div class="export">
+<!--        <button mat-raised-button color="primary"-->
+<!--                style="color: #fff; margin-right: 8px">Export as png</button>-->
+        <button mat-raised-button color="primary"
+                (click)="openExportDialog()"
+                style="color: #fff">Export</button>
+      </div>
+    </div>
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, fugiat!
+    </div>
+  </div>
+  <div class="spinner" *ngIf="isSpinnerVisible">
+    <app-spinner></app-spinner>
+  </div>
+  <ng-container *ngIf="!isSpinnerVisible">
+    <div class="user-list">
+      <cdk-virtual-scroll-viewport
+        itemSize="20">
+        <table id="userList">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Registered at</th>
+            <th>Posts</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="user-item"
+              *cdkVirtualFor="let user of users| paginate: { itemsPerPage: userPager.limit, currentPage: userPager.offset, totalItems: userPager.count }">
+            <td>
+              <div class="left-side">
+                <div class="img-container">
+                  <div class="img">
+                    <ng-container *ngIf="user?.picture?.thumbnail; else defaultImg">
+                      <img [src]="user.picture.thumbnail" alt="">
+                    </ng-container>
+                    <ng-template #defaultImg>
+                      <div appDefaultImg
+                           [firstName]="user.firstName"
+                           [lastName]="user.lastName"></div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div>
+                  <div class="name">{{user.firstName}} {{user.lastName}}</div>
+                  <div class="email">{{user.email}}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              {{user.phone}}
+            </td>
+            <td>
+              {{user.registered | dateTimeFormat: 'DD MMM YYYY HH:mm'}}
+            </td>
+            <td>
+              <ng-container *ngIf="user?.posts?.length; else noPosts">
+                {{user.posts.length}}
+              </ng-container>
+              <ng-template #noPosts>0</ng-template>
+            </td>
+            <td class="see-post">
+              <button mat-stroked-button color="primary"
+                      [routerLink]="'/user/posts'"
+                      [queryParams]="{userId: user._id}"
+                      style="color: #fff">See post</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </cdk-virtual-scroll-viewport>
+    </div>
+    <div class="pagination-main">
+      <app-table-footer
+        [selected]="users.length"
+        [pagerCount]="userPager.count"
+        (limitChange)="onLimitChange($event)"
+        (pagerChange)="onTablePagerChange($event)"
+      ></app-table-footer>
+    </div>
+  </ng-container>
+</div>
+
+

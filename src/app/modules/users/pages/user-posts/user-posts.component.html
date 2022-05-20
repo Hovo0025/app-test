@@ -1,0 +1,97 @@
+<div class="user-container">
+  <div class="spinner" *ngIf="isSpinnerVisible">
+    <app-spinner></app-spinner>
+  </div>
+  <ng-container *ngIf="!isSpinnerVisible">
+    <div *ngIf="user; else userNotFound" class="top-content">
+      <div class="about-user">
+        <div class="left-side">
+          <div class="img-container">
+            <div class="img">
+              <ng-container *ngIf="user?.picture?.large; else defaultImg">
+                <img [src]="user.picture.large" alt="">
+              </ng-container>
+              <ng-template #defaultImg>
+                <div appDefaultImg
+                     [firstName]="user.firstName"
+                     [lastName]="user.lastName"></div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="text-container">
+            <h2>{{user.firstName}} {{user.lastName}}</h2>
+            <div><b>Email: </b> <span>{{user.email}}</span></div>
+            <div><b>Phone: </b> <span>{{user.phone}}</span></div>
+            <div><b>Posts: </b> <span>{{userPosts.length}}</span></div>
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="about">
+            {{user.about}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #userNotFound>
+      <div class="user-not-fount">
+        User Not Found :(
+      </div>
+
+    </ng-template>
+  </ng-container>
+
+
+  <ng-container *ngIf="!isSpinnerVisible && user">
+    <ng-container *ngIf="userPosts.length; else noPosts">
+      <div class="posts-list">
+              <cdk-virtual-scroll-viewport
+                itemSize="20">
+                <table id="userList">
+                  <thead>
+                  <tr>
+                    <th style="min-width: 78px;">ID</th>
+                    <th style="min-width: 184px;">Created at</th>
+                    <th>Post</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="user-item"
+                      *cdkVirtualFor="let post of userPosts| paginate: { itemsPerPage: postPager.limit, currentPage: postPager.offset, totalItems: postPager.count }">
+                    <td>
+                      {{ post._id }}
+                    </td>
+                    <td>
+                      {{ post.createdAt | dateTimeFormat: 'DD MMM YYYY HH:mm'}}
+                    </td>
+                    <td class="post-row">
+                      {{ post.post }}
+                    </td>
+                    <td class="see-post">
+                      <button mat-stroked-button color="primary"
+                              [routerLink]="'/user/posts'"
+                              [queryParams]="{userId: user._id}"
+                              style="color: #fff; margin: 0 15px">See Detail</button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </cdk-virtual-scroll-viewport>
+      </div>
+      <div class="pagination-main">
+        <app-table-footer
+          [selected]="userPosts.length"
+          [pagerCount]="postPager.count"
+          (limitChange)="onLimitChange($event)"
+          (pagerChange)="onTablePagerChange($event)"
+        ></app-table-footer>
+      </div>
+    </ng-container>
+    <ng-template #noPosts>
+      <div class="no-posts">
+        User does not have any posts :(
+      </div>
+    </ng-template>
+  </ng-container>
+</div>
+
+

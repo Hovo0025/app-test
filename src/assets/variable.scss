@@ -1,0 +1,24 @@
+$tablets: 1280px;
+$mobile-max-width: 767px;
+$mobile-medium: 480px;
+$mobile-min-width: 320px;
+
+:root {
+  $header-height: 70px;
+  $user-header-height: 112px;
+  $profile-header-height: 170px;
+  $user-bottom-height: 60px;
+  $img-container-small: 52px;
+  $img-container-large: 128px;
+  $img-inner-small: 48px;
+  $img-inner-large: 124px;
+  --header-height: #{$header-height};
+  --user-header-height: #{$user-header-height};
+  --user-bottom-height: #{$user-bottom-height};
+  --profile-header-height: #{$profile-header-height};
+  --img-container-small: #{$img-container-small};
+  --img-container-large: #{$img-container-large};
+  --img-inner-small: #{$img-inner-small};
+  --img-inner-large: #{$img-inner-large};
+}
+

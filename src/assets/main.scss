@@ -1,0 +1,152 @@
+@import "/src/assets/variable";
+@import "/src/assets/media";
+
+html, body { height: 100%; }
+body { margin: 0; box-sizing: border-box; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Tracs */
+::-webkit-scrollbar {
+  background: transparent;
+  width: 4px;
+  height: 4px;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 1px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-corner{
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  position: absolute;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: none;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: transparent;
+}
+
+.container {
+  width: 100%;
+  padding: 0 25px 0 25px;
+  box-sizing: border-box;
+  background: #fafafa;;
+  height: calc(100vh - var(--header-height));
+}
+
+app-table-footer {
+  display: flex;
+  width: 100%;
+}
+
+.pagination-main {
+  display: flex;
+  height: var(--user-bottom-height);
+}
+
+.img-container {
+  background: #fff;
+  border: 1px solid #ACD373;
+  width: 128px;
+  height: 128px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img {
+  background: #ACD373;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 23px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  background: #fafafa;
+  th {
+    color: #636363;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: start;
+    position: sticky;
+    top: 0;
+    background: #fafafa;
+    z-index: 999;
+  }
+}
+
+.user-list, .posts-list {
+  @include mobile-max-width {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr { border: 1px solid #ccc; }
+
+    td {
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50%;
+      @include mobile-medium {
+        padding-left: 134px;
+      }
+    }
+
+    td.see-post {
+      @include mobile-medium {
+        padding-left: 10px;
+      }
+    }
+
+    td:before {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      @include mobile-medium {
+        width: 128px;
+        height: 100%;
+        align-items: center;
+        display: flex;
+      }
+    }
+    td.see-post:before {
+      @include mobile-medium {
+        width: 10px;
+      }
+    }
+  }
+}
+
+.user-list table {
+  td:nth-of-type(1):before { content: "Name"; }
+  td:nth-of-type(2):before { content: "Phone"; }
+  td:nth-of-type(3):before { content: "Registered at"; }
+  td:nth-of-type(4):before { content: "Posts"; }
+  td:nth-of-type(5):before { content: ""; }
+}
+
+.posts-list table {
+  td:nth-of-type(1):before { content: "ID"; }
+  td:nth-of-type(2):before { content: "Created at"; }
+  td:nth-of-type(3):before { content: "Post"; }
+  td:nth-of-type(5):before { content: ""; }
+}
